@@ -1,4 +1,48 @@
+#type Query {
+#    users: [User!]! @all
+#}
 
 type Query {
-    greetings: String!
+    users: [User!]! @paginate
 }
+
+
+type User {
+    id: ID!
+    name: String!
+    email: String
+}
+
+
+type User {
+    id : ID!
+    name : String!
+    email : String!
+}
+
+type Query {
+    #Fetach All Users
+    #    users : [User!]! @all
+
+    #Find User By ID
+    user(id: ID! @eq) : User @find
+
+    #Pagination Users
+    users : [User!] @paginate
+}
+
+input DeleteUserInput {
+    id: ID!
+}
+
+type Mutation {
+    #User Creation
+    createUser(name: String, !email : String, !password: String!): User! @create
+
+    #User Update
+    updateUser(id: ID!, name:String, email : String, password: String): User! @update
+
+    #User Delete
+    deleteUser(id: ID!): User @delete
+}
+
